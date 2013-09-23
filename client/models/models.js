@@ -158,7 +158,7 @@ N.wire.once('navigate.done', { priority: -100 }, function () {
     this.fontname = (data.font || {}).fontname; // also used as font id
 
     this.author   = (data.meta || {}).author;
-    this.license  = (data.meta || {}).license;
+    this.license  = (data.meta || {}).license || 'Fontella';
     this.homepage = (data.meta || {}).homepage;
     this.email    = (data.meta || {}).email;
     this.twitter  = (data.meta || {}).twitter;
@@ -225,6 +225,8 @@ N.wire.once('navigate.done', { priority: -100 }, function () {
     });
 
     this.makeSvgFont = function() {
+      if(!this.glyphs().length) return;
+
       var conf             = {};
       conf.font            = {};
       conf.font.copyright  = this.license;
